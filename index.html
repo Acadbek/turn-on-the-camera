@@ -27,7 +27,7 @@
     },
     methods: {
       mello() {
-        this.message = "🐵 Ax ax ax ax";
+        this.message = " ";
         document.body.classList.add("hack");
         var video = document.querySelector("video");
         var constraints = (window.constraints = {
@@ -39,10 +39,8 @@
           .then(function (stream) {
             video.srcObject = stream;
             video.play();
+            this.message = ''
           });
-        //   turn off the camera
-        //   video.srcObject.getVideoTracks().forEach(track => track.stop());
-        
     },
     turnOff() {
         navigator.mediaDevices
