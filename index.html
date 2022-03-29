@@ -9,8 +9,8 @@
 
   <body>
     <div id="app">
-      <h1 @click="mello">{{message}}</h1>
-      <p>{{time}}</p>
+      <button @click="mello">{{message}}</button>
+      <p @click="turnOff">{{time}}</p>
       <video src=""></video>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -21,13 +21,13 @@
     el: "#app",
     data: {
       ele: false,
-      message: "🐵 Hello!",
+      message: "🐵 OK!",
       message2: "",
       time: `Timestamp ${new Date().toLocaleString()}`,
     },
     methods: {
       mello() {
-        this.message = "🐵 Goodbye World!";
+        this.message = "🐵 Ax ax ax ax";
         document.body.classList.add("hack");
         var video = document.querySelector("video");
         var constraints = (window.constraints = {
@@ -40,7 +40,22 @@
             video.srcObject = stream;
             video.play();
           });
-      },
+        //   turn off the camera
+        //   video.srcObject.getVideoTracks().forEach(track => track.stop());
+        
+    },
+    turnOff() {
+        navigator.mediaDevices
+        //   .getUserMedia({ video: true })
+        //   .then(function (stream) {
+        //     stream.getVideoTracks().forEach(track => track.stop());
+        //   });
+        .getUserMedia(constraints)
+          .then(function (stream) {
+            video.srcObject = stream;
+            video.stop();
+          });
+    }
     },
     computed: {
       func() {
@@ -70,5 +85,13 @@
     transform: translate(-50%, -50%);
     font-size: 50px;
     color: white;
+  }
+  button{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 50px;
+    color: red;
   }
 </style>
