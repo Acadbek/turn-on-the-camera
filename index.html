@@ -9,8 +9,10 @@
 
   <body>
     <div id="app">
-      <button @click="mello">{{message}}</button>
-      <p @click="turnOff">{{time}}</p>
+        <button @click="mello" class="btn second">Button 2</button>
+      <!-- <button class="btn" @click="mello">{{message}}</button> -->
+      <!-- <button class="btn2" @click="turnOff">Off</button> -->
+      <p >{{time}}</p>
       <video src=""></video>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -43,16 +45,16 @@
           });
     },
     turnOff() {
-        navigator.mediaDevices
-        //   .getUserMedia({ video: true })
-        //   .then(function (stream) {
-        //     stream.getVideoTracks().forEach(track => track.stop());
-        //   });
-        .getUserMedia(constraints)
-          .then(function (stream) {
-            video.srcObject = stream;
-            video.stop();
-          });
+        //  turn off camera
+        var video = document.querySelector("video");
+        var stream = video.srcObject;
+        var tracks = stream.getTracks();
+        tracks.forEach(function (track) {
+          track.stop();
+        });
+        video.srcObject = null;
+        document.body.classList.remove("hack");
+        this.message = "🐵 OK!";
     }
     },
     computed: {
@@ -75,16 +77,16 @@
     z-index: 9999;
   }
 
-  .hack::before {
-    content: "hacking";
+  /* .hack::before {
+    content: "";
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 50px;
     color: white;
-  }
-  button{
+  } */
+  .btn{
     position: absolute;
     top: 50%;
     left: 50%;
@@ -92,4 +94,48 @@
     font-size: 50px;
     color: red;
   }
+  .btn2{
+    position: absolute;
+    top: 50%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    font-size: 50px;
+    color: red;
+  }
+  html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: #2c3e50;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+}
+.second {
+  border-radius: 3em;
+  border-color: #1abc9c;
+  color: #fff;
+  background-image: -webkit-linear-gradient(left, rgba(26, 188, 156, 0.6), rgba(26, 188, 156, 0.6) 5%, #1abc9c 5%, #1abc9c 10%, rgba(26, 188, 156, 0.6) 10%, rgba(26, 188, 156, 0.6) 15%, #1abc9c 15%, #1abc9c 20%, rgba(26, 188, 156, 0.6) 20%, rgba(26, 188, 156, 0.6) 25%, #1abc9c 25%, #1abc9c 30%, rgba(26, 188, 156, 0.6) 30%, rgba(26, 188, 156, 0.6) 35%, #1abc9c 35%, #1abc9c 40%, rgba(26, 188, 156, 0.6) 40%, rgba(26, 188, 156, 0.6) 45%, #1abc9c 45%, #1abc9c 50%, rgba(26, 188, 156, 0.6) 50%, rgba(26, 188, 156, 0.6) 55%, #1abc9c 55%, #1abc9c 60%, rgba(26, 188, 156, 0.6) 60%, rgba(26, 188, 156, 0.6) 65%, #1abc9c 65%, #1abc9c 70%, rgba(26, 188, 156, 0.6) 70%, rgba(26, 188, 156, 0.6) 75%, #1abc9c 75%, #1abc9c 80%, rgba(26, 188, 156, 0.6) 80%, rgba(26, 188, 156, 0.6) 85%, #1abc9c 85%, #1abc9c 90%, rgba(26, 188, 156, 0.6) 90%, rgba(26, 188, 156, 0.6) 95%, #1abc9c 95%, #1abc9c 100%);
+  background-image: linear-gradient(to right, rgba(26, 188, 156, 0.6), rgba(26, 188, 156, 0.6) 5%, #1abc9c 5%, #1abc9c 10%, rgba(26, 188, 156, 0.6) 10%, rgba(26, 188, 156, 0.6) 15%, #1abc9c 15%, #1abc9c 20%, rgba(26, 188, 156, 0.6) 20%, rgba(26, 188, 156, 0.6) 25%, #1abc9c 25%, #1abc9c 30%, rgba(26, 188, 156, 0.6) 30%, rgba(26, 188, 156, 0.6) 35%, #1abc9c 35%, #1abc9c 40%, rgba(26, 188, 156, 0.6) 40%, rgba(26, 188, 156, 0.6) 45%, #1abc9c 45%, #1abc9c 50%, rgba(26, 188, 156, 0.6) 50%, rgba(26, 188, 156, 0.6) 55%, #1abc9c 55%, #1abc9c 60%, rgba(26, 188, 156, 0.6) 60%, rgba(26, 188, 156, 0.6) 65%, #1abc9c 65%, #1abc9c 70%, rgba(26, 188, 156, 0.6) 70%, rgba(26, 188, 156, 0.6) 75%, #1abc9c 75%, #1abc9c 80%, rgba(26, 188, 156, 0.6) 80%, rgba(26, 188, 156, 0.6) 85%, #1abc9c 85%, #1abc9c 90%, rgba(26, 188, 156, 0.6) 90%, rgba(26, 188, 156, 0.6) 95%, #1abc9c 95%, #1abc9c 100%);
+  background-position: 0 0;
+  background-size: 100%;
+  -webkit-transition: background 300ms ease-in-out;
+  transition: background 300ms ease-in-out;
+  animation: animate-bg 500ms ease-in-out infinite;
+  font-size: 35px;
+}
+.second:hover {
+  background-position: 100px;
+}
+@keyframes animate-bg {
+    0% {
+      background-position: 0 0;
+    }
+    50% {
+      background-position: -50px 0;
+    }
+    100% {
+      background-position: 0 0;
+    }
+}
 </style>
